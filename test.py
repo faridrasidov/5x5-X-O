@@ -2,7 +2,7 @@ import ast
 
 import numpy as np
 
-from learn import load_learn_data, corrupt_data, learning_output
+from learn import load_learn_data, corrupt_data, learning_output, lost_data
 
 
 def classify(input_pattern, w_vector, b):
@@ -13,7 +13,7 @@ def classify(input_pattern, w_vector, b):
     return 1 if result >= 0 else -1
 
 
-def test_heb_network(all_dict):
+def test_heb_network(all_dict, dict_name):
     """
     test the Heb network with loaded datas.
     some_d: Dictionary of input patterns for 'X' and 'O'.
@@ -38,8 +38,8 @@ def test_heb_network(all_dict):
     percent_x = correct_X / len(all_dict['1']) * 100
     percent_o = correct_O / len(all_dict['-1']) * 100
 
-    print(f"Correctly Classified 'X': {x_rate}", f"With {round(percent_x, 2)}%")
-    print(f"Correctly Classified 'O': {o_rate}", f"With {round(percent_o, 2)}%")
+    print(f"Correctly Classified {dict_name} 'X': {x_rate}", f"With {round(percent_x, 2)}%")
+    print(f"Correctly Classified {dict_name} 'O': {o_rate}", f"With {round(percent_o, 2)}%")
 
 
 if __name__ == '__main__':
@@ -52,8 +52,12 @@ if __name__ == '__main__':
 
     # checking learned data identifying
     test_dict = load_learn_data()
-    test_heb_network(test_dict)
+    test_heb_network(test_dict, 'learned')
 
     # checking corrupted data identifying
     corrupt_dict = load_learn_data(corrupt_data)
-    test_heb_network(corrupt_dict)
+    test_heb_network(corrupt_dict, 'corrupted')
+
+    # checking lost data identifying
+    lost_dict = load_learn_data(lost_data)
+    test_heb_network(lost_dict, 'lost')

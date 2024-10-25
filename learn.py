@@ -4,7 +4,7 @@ script_path = path.dirname(path.abspath(__file__))
 learning_data = script_path + '/learn_data.txt'
 learning_output = script_path + '/learn_output.txt'
 corrupt_data = script_path + '/corrupted_data.txt'
-
+lost_data = script_path + '/lost_data.txt'
 
 def load_learn_data(file_name: str = None):
     """
